@@ -47,6 +47,8 @@ spec:
       containers:
       - image: gcr.io/vmwarecloudadvocacy/acmeshop-pos:v0.1.0-beta
         name: pos
+        command: ["/bin/bash"]
+        args: ["-c", "apt update && apt install -y ca-certificates && ./acme-pos"]
         env:
         - name: HTTP_PORT
           value: '7777'
