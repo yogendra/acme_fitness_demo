@@ -14,9 +14,9 @@ spec:
   tls:
     - secretName: pos-tls
       hosts:
-        - pos-acme-fitness.aws.cna-demo.ga
+        - pos.domain
   rules:
-    - host: pos-acme-fitness.aws.cna-demo.ga
+    - host: pos.domain
       http:
         paths:
           - backend:
