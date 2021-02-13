@@ -16,6 +16,13 @@ spec:
     service: pos
   type: ClusterIP
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pos-config
+data:
+  frontend-service: 'frontend.default.svc.cluster.local'
+---
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
@@ -46,7 +53,10 @@ spec:
         - name: DATASTORE
           value: 'REMOTE'
         - name: FRONTEND_HOST
-          value: 'frontend.default.svc.cluster.local'
+          valueFrom:
+            configMapKeyRef:
+              name: pos-config
+              key: frontend-service
         ports:
         - containerPort: 7777
           name: pos
